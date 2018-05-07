@@ -1,0 +1,38 @@
+FIFO
+
+FIFO is an acronym for First In, First Out, an abstraction in ways of organizing and manipulation of data relative to time and prioritization. This expression describes the principle of a queue processing technique or servicing conflicting demands by ordering process by first-come, first-served (FCFS) behavior: what comes in first is handled first, what comes in next waits until the first is finished, etc.
+
+FIFOs are used commonly in electronic circuits for buffering and flow control which is from hardware to software. In hardware form a FIFO primarily consists of a set of read and write pointers, storage and control logic. Storage may be SRAM, flip-flops, latches or any other suitable form of storage. For FIFOs of non-trivial size a dual-port SRAM is usually used where one port is used for writing and the other is used for reading.
+
+A synchronous FIFO is a FIFO where the same clock is used for both reading and writing. An asynchronous FIFO uses different clocks for reading and writing. Asynchronous FIFOs introduce metastability issues. A common implementation of an asynchronous FIFO uses a Gray code (or any unit distance code) for the read and write pointers to ensure reliable flag generation. One further note concerning flag generation is that one must necessarily use pointer arithmetic to generate flags for asynchronous FIFO implementations. Conversely, one may use either a “leaky bucket" approach or pointer arithmetic to generate flags in synchronous FIFO implementations.
+
+Examples of FIFO status flags include: full, empty, almost full, almost empty, etc...
+
+FIFO full/empty
+
+In hardware FIFO is used for synchronization purposes. It is often implemented as a circular queue, and thus has two pointers:
+
+    Read Pointer/Read Address Register
+
+    Write Pointer/Write Address Register
+
+Read and write addresses are initially both at the first memory location and the FIFO queue is Empty.
+
+FIFO Empty
+    When read address register reaches to write address register, the FIFO triggers the Empty signal. 
+FIFO FULL
+    When write address register reaches to read address register, the FIFO triggers the FULL signal.
+
+		=========
+clock---------->|	|<---read
+write---------->| FIFO	|--->dataout[7:0]
+datain[7:0]---->|	|--->full
+		|	|--->empty
+		=========
+
+
+Inputs: clock, data-in, write, read
+
+Outputs: data-out, full, empty
+
+FIFO Deep: 32 entries
