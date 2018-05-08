@@ -15,8 +15,8 @@ module fifo_32_hierachical(
 	input [7:0] datain;
 	output [7:0] dataout;
 	output full, empty;
-
 ////////////////////////////////////////////////////////////////////////////////
+
 	wire [5:0] writePtr, readPtr;
 	wire writeEn, readEn;
 	wire [4:0] writeAddr, readAddr;
@@ -72,6 +72,7 @@ module fifo_read (
 // Port declarations
 	input clock, readEn;
 	output [5:0] readPtr;
+////////////////////////////////////////////////////////////////////////////////
 	
 	reg [5:0] readPtrReg;
 
@@ -97,6 +98,7 @@ module fifo_write (
 // Port declarations
 	input clock, writeEn;
 	output [5:0] writePtr;
+////////////////////////////////////////////////////////////////////////////////
 	
 	reg [5:0] writePtrReg;
 	
@@ -127,6 +129,7 @@ module buffer (
 	input [4:0] writeAddr, readAddr;
 	input [7:0] datain;
 	output [7:0] dataout;
+////////////////////////////////////////////////////////////////////////////////
 	
 	reg [7:0] buffer [31:0];
 	reg [7:0] datatoutReg;
@@ -166,6 +169,7 @@ module fifo_status (
 // Port declarations
 	input write, writeFlag, read, readFlag;
 	output writeEn, readEn, full, empty;
+////////////////////////////////////////////////////////////////////////////////
 	
 	////////////////////////////////////////////////////////////////////////////////
 	//Description:
