@@ -19,7 +19,7 @@ module fifo (
 ////////////////////////////////////////////////////////////////////////////////
 	
 	reg [7:0] buffer [31:0];
-	reg [4:0] wPtr, rPtr
+	reg [4:0] wPtr, rPtr;
 	reg [5:0] length;
 	reg [7:0] datatoutReg;
 	reg fullReg, emptyReg;
