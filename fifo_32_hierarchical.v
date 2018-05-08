@@ -138,13 +138,13 @@ module buffer (
 	
 	always @(posedge clock) begin
 		else if (writeEn) begin
-			buffer[wAddr] <= datain;
+			buffer[writeAddr] <= datain;
 		end
 	end
 	
 	always @(posedge clock) begin
 		else if (readEn) begin
-			dataoutReg <= buffer[rAddr];
+			dataoutReg <= buffer[readAddr];
 		end
 		else dataoutReg <= 8'b0;
 	end
