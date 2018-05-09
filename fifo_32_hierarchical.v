@@ -1,4 +1,4 @@
-module fifo_32_hierachical(
+module fifo_32_hierarchical(
 	clock,
 	write,
 	datain,
@@ -7,7 +7,7 @@ module fifo_32_hierachical(
 	full,
 	empty
 	);
-	
+   
 ////////////////////////////////////////////////////////////////////////////////
 // Port declarations	
 	input clock;
@@ -24,19 +24,19 @@ module fifo_32_hierachical(
 	assign readAddr = readPtr[4:0];
 	assign writeAddr = writePtr[4:0];
 	
-	fifo_read u0 (
+	fifo_read ififoread (
 		.clock(clock),
 		.readEn(readEn)
 		.readPtr(readPtr)
 		);
 		
-	fifo_write u1 (
+	fifo_write ififowrite (
 		.clock(clock),
 		.writeEn(writeEn),
 		.writePtr(writePtr)
 		);
 		
-	buffer u2 (
+	buffer ibuffer (
 		.clock(clock),
 		.writeEn(writeEn),
 		.writeAddr(writeAddr),
@@ -46,7 +46,7 @@ module fifo_32_hierachical(
 		.dataout(dataout)
 		);
 		
-	fifo_status u3 (
+	fifo_status ififostatus (
 		.write(write),
 		.writePtr(writePtr),
 		.read(read),
@@ -173,10 +173,10 @@ module fifo_status (
 	
 	////////////////////////////////////////////////////////////////////////////////
 	//Description:
-	// Buffer is FULL when wPtr and rPtr are in different rounds and they met each other
-	// Buffer is EMPTY when wPtr and rPtr are in the same round and they met each other
-	assign full = (writePtr[5] ^ readPtr[5]) & !(writePtr[4:0] ^ readPtr[4:0]);
-	assign empty = !(writePtr[5] ^ readPtr[5]) & !(writePtr[4:0] ^ readPtr[4:0]);
+	// Buffer is FULL when writePtr and readPtr are in different rounds and they met each other
+	// Buffer is EMPTY when writePtr and readPtr are in the same round and they met each other
+	assign full = (writePtr[5] != readPtr[5]) && (writePtr[4:0] == readPtr[4:0]);
+	assign empty = !(writePtr == readPtr);
 	
 	assign writeEn = ~full & write;
 	assign readEn = ~empty & read;

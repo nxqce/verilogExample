@@ -33,25 +33,21 @@ module fifo_32(
 	//Description:
 	// Buffer is FULL when wPtr and rPtr are in different rounds and they met each other
 	// Buffer is EMPTY when wPtr and rPtr are in the same round and they met each other
-	
-	assign full = (wPtr[5] ^ rPtr[5]) & !(wAddr ^ rAddr);
-	assign empty = !(wPtr[5] ^ rPtr[5]) & !(wAddr ^ rAddr);
+	assign full = (wPtr[5] != rPtr[5]) && (wAddr == rAddr);
+	assign empty = (wPtr == rPtr);
 	
 	assign writeEn = ~full & write;
 	assign readEn = ~empty & read;
 	
 	always @(posedge clock) begin
-		if (writeEn && readEn) begin
-			buffer[wAddr] <= datain;
-			dataoutReg <= buffer[rAddr];
-			wPtr <= wPtr + 1'b1;
-			rPtr <= rPtr + 1'b1;
-		end
-		else if (writeEn) begin
+		if (writeEn) begin
 			buffer[wAddr] <= datain;
 			wPtr <= wPtr + 1'b1;
 		end
-		else if (readEn) begin
+	end
+	
+	always @(posedge clock) begin
+		if (readEn) begin
 			dataoutReg <= buffer[rAddr];
 			rPtr <= rPtr + 1'b1;
 		end
