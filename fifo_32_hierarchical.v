@@ -176,7 +176,7 @@ module fifo_status (
 	// Buffer is FULL when writePtr and readPtr are in different rounds and they met each other
 	// Buffer is EMPTY when writePtr and readPtr are in the same round and they met each other
 	assign full = (writePtr[5] != readPtr[5]) && (writePtr[4:0] == readPtr[4:0]);
-	assign empty = !(writePtr == readPtr);
+	assign empty = (writePtr == readPtr);
 	
 	assign writeEn = ~full & write;
 	assign readEn = ~empty & read;
