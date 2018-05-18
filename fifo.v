@@ -21,7 +21,7 @@ module fifo (
 	reg [7:0] buffer [31:0];
 	reg [4:0] wPtr, rPtr;
 	reg [5:0] length;
-	reg [7:0] datatoutReg;
+	reg [7:0] dataoutReg;
 	reg fullReg, emptyReg;
 
 	wire writeEn, readEn;

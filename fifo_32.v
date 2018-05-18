@@ -20,7 +20,7 @@ module fifo_32(
 	
 	reg [7:0] buffer [31:0];
 	reg [5:0] wPtr, rPtr;
-	reg [7:0] datatoutReg;
+	reg [7:0] dataoutReg;
 
 	wire writeEn, readEn;
 	wire [4:0] wAddr, rAddr;
